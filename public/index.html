@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>What song is that?</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <style>
+        /* Custom styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+        .auth-buttons {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .auth-button {
+            margin-left: 10px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .auth-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="drop-area">
+        <p>Drag and drop a TikTok file here</p>
+    </div>
+
+    <script src="script.js"></script>
+
+<div id="drop-zone" style="border: 2px dashed #ccc; padding: 20px; text-align: center; margin-top: 20px;">
+    Drag and drop your video here
+</div>
+
+<script>
+    const dropZone = document.getElementById('drop-zone');
+
+    dropZone.addEventListener('dragover', (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        event.dataTransfer.dropEffect = 'copy'; // Visual feedback for drag-and-drop
+    });
+
+    dropZone.addEventListener('drop', (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        const files = event.dataTransfer.files;
+        console.log('Dropped files:', files);
+        // Handle the files (e.g., display a preview, prepare for upload)
+    });
+</script>
+
+<style>
+    #drop-zone {
+        border: 2px dashed #ccc;
+        padding: 20px;
+        text-align: center;
+        margin-top: 20px;
+        transition: background-color 0.3s;
+    }
+    .drag-over {
+        background-color: orange;
+    }
+    .success {
+        background-color: green;
+    }
+    .failure {
+        background-color: red;
+    }
+</style>
+<script>
+    const dropZone = document.getElementById('drop-zone');
+
+    dropZone.addEventListener('dragover', (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        event.dataTransfer.dropEffect = 'copy';
+        dropZone.classList.add('drag-over');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('drag-over');
+    });
+
+    dropZone.addEventListener('drop', (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        dropZone.classList.remove('drag-over');
+
+        const files = event.dataTransfer.files;
+        console.log('Dropped files:', files);
+        
+        // Implement file upload logic here...
+        // For demonstration, let's assume the upload is successful
+        dropZone.classList.add('success');
+        
+        // If the upload fails, add the 'failure' class instead
+        // dropZone.classList.add('failure');
+    });
+</script>
+
+<p style="margin-top: 20px;">
+    <span style="color: orange;">Orange</span>: File is being dragged over the drop zone.<br>
+    <span style="color: green;">Green</span>: File has been successfully uploaded.<br>
+    <span style="color: red;">Red</span>: There was an error uploading the file.
+</p>
+</body>
+</html>
